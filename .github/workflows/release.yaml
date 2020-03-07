@@ -13,6 +13,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Cache cargo files
+        uses: actions/cache@v1
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Test
         run: cargo test --release
       - name: Test with standalone feature
@@ -26,6 +31,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Cache cargo files
+        uses: actions/cache@v1
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Build realease binary
         run: cargo build --release
       - name: Generate release tarball
