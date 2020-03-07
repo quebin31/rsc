@@ -40,3 +40,12 @@ jobs:
         run: cargo build --release
       - name: Generate release tarball
         run: tar czf release.tar.gz share target/release/rsc
+      - name: Set VERSION environment variable
+        run: |
+          version=$(echo $GITHUB_REF | cut -d '/' -f3)
+          echo "::set-env name=VERSION::$version"
+      - name: Publish release on GitHub
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release.tar.gz
+          body_path: changelogs/${{ env.VERSION }}.md
