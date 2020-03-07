@@ -1,0 +1,32 @@
+name: Release new version
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: rust:latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test
+        run: cargo test --release
+      - name: Test with standalone feature
+        run: cargo test --features standalone --release
+
+  # TODO: Add steps to publish tarball to the AUR
+  publish:
+    runs-on: ubuntu-latest
+    container:
+      images: rust:latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build realease binary
+        run: cargo build --release
+      - name: Generate release tarball
+        run: tar czf release.tar.gz share target/release/rsc
