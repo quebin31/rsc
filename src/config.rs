@@ -19,7 +19,8 @@
 // fallback is set to true, a normal user will pick the system-wide
 // config file if its config doesn't exists.
 
-use std::fs;
+use std::fs::{self, File};
+use std::io::Write;
 use std::path::{Path, PathBuf};
 
 use cfg_if::cfg_if;
@@ -57,7 +58,7 @@ pub fn generate_config_file() -> Result<(), Error> {
     if !shared_config.exists() {
         cfg_if! {
             if #[cfg(feature = "standalone")] {
-                let config_file = File::create(config_path)?;
+                let mut config_file = File::create(config_path)?;
                 write!(config_file, "{}", include_str!("../share/config.toml"))?;
             } else {
                 return Err(RscError::ResourceNotFound {
