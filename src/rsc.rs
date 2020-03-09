@@ -18,8 +18,8 @@
 pub mod client;
 pub mod server;
 
+use anyhow::Error;
 use clap::App as ClapApp;
-use failure::Error;
 
 use self::server::RscServer;
 

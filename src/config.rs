@@ -23,9 +23,9 @@ use std::fs::{self, File};
 use std::io::Write;
 use std::path::{Path, PathBuf};
 
+use anyhow::Error;
 use cfg_if::cfg_if;
 use dirs;
-use failure::Error;
 use log::info;
 use serde::Deserialize;
 

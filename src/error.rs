@@ -15,13 +15,13 @@
 // You should have received a copy of the GNU General Public License
 // along with rsc.  If not, see <http://www.gnu.org/licenses/>.
 
-use failure::Fail;
+use thiserror::Error;
 
-#[derive(Debug, PartialEq, Fail)]
+#[derive(Debug, PartialEq, Error)]
 pub enum RscError {
-    #[fail(display = "Invalid config file: \"{}\" (reason: {})", path, reason)]
+    #[error("Invalid config file: \"{path}\" (reason: {reason})")]
     InvalidConfig { path: String, reason: String },
 
-    #[fail(display = "Resource \"{}\" wasn't found!", resource)]
+    #[error("Resource \"{resource}\" wasn't found!")]
     ResourceNotFound { resource: String },
 }

@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with rsc.  If not, see <http://www.gnu.org/licenses/>.
 
+use anyhow::Error;
 use clap::ArgMatches;
-use failure::Error;
 
 use super::Runnable;
 use crate::config::{self, Config};

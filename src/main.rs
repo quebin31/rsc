@@ -26,8 +26,8 @@ mod util;
 
 use std::process;
 
+use anyhow::Error;
 use clap::clap_app;
-use failure::Error;
 use human_panic::setup_panic;
 use log::{error, info};
 
